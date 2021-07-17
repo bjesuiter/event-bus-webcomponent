@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
 
-    <script type="module" src="/build/event-bus-webcomponent.esm.js"></script>
-    <script nomodule src="/build/event-bus-webcomponent.js"></script>
-  </head>
-  <body>
-    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/event-bus-webcomponent.esm.js"></script>
+  <script nomodule src="/build/event-bus-webcomponent.js"></script>
+
+  <!-- TODO: figure out how to send typescript class based events here (as example)! -->
+  <script>
+    async function main() {
+      const bus = document.querySelector('event-bus');
+      const eventStream = await bus.getEventStream();
+      eventStream.subscribe((event) => { console.debug(`event-bus got event: `, event) })
+    }
+  </script>
+</head>
+
+<body onload="main()">
+  <event-bus></event-bus>
+</body>
+
 </html>
