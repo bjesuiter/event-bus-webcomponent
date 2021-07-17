@@ -5,57 +5,63 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { EventBusErrorCallback } from "./types/event-bus-error-callback";
+import { Observable, Subscription } from "rxjs";
+import { TypeDiscriminator } from "./types/type-discriminator";
+import { EventBusCallback } from "./types/event-bus-callback";
 export namespace Components {
-    interface MyComponent {
+    interface EventBus {
         /**
-          * The first name
+          * I push the given event onto the message bus.  Note: Public methods in stencil elements need to be async by definition!
+          * @param event
          */
-        "first": string;
+        "emit": (event: any) => Promise<void>;
         /**
-          * The last name
+          * @returns the complete eventStream as observable inside a promise
          */
-        "last": string;
+        "getEventStream": () => Promise<Observable<any>>;
         /**
-          * The middle name
+          * @param typeFilter
+          * @returns an observable which contains only events of type 'typeFilter'
          */
-        "middle": string;
+        "getEventStreamFor": <T>(typeFilter: TypeDiscriminator<T>) => Promise<Observable<T>>;
+        /**
+          * I subscribe to the message bus, but only invoke the callback when the event is of the given newable type (ie, it's a Class definition, not an instance). -- NOTE: The NewableType<T> will allow for Type inference.
+          * @param typeFilter
+          * @param callback
+          * @param callbackContext
+          * @returns
+         */
+        "on": <T>(typeFilter: TypeDiscriminator<T>, callback: EventBusCallback<T>, callbackContext?: any, errorCallback?: EventBusErrorCallback) => Promise<Subscription>;
+        /**
+          * Replaces the default error callback function with a custom one
+         */
+        "setDefaultErrorCallback": (callback: EventBusErrorCallback) => Promise<void>;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLEventBusElement extends Components.EventBus, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLEventBusElement: {
+        prototype: HTMLEventBusElement;
+        new (): HTMLEventBusElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "event-bus": HTMLEventBusElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface EventBus {
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "event-bus": EventBus;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "event-bus": LocalJSX.EventBus & JSXBase.HTMLAttributes<HTMLEventBusElement>;
         }
     }
 }
