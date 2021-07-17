@@ -4,6 +4,8 @@ import { BusEvent } from './bus-event';
  * I am the sub-class / base-class for all of the payload-heavy events that this
  * application pushes onto the MessageQueue. This class guarantees a payload with a
  * given interface.
+ *
+ * Was called 'EventWithPayload' in original article
  */
 export abstract class BusEventWithPayload<T> extends BusEvent {
   public readonly payload: T;
