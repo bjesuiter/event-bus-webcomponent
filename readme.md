@@ -26,3 +26,7 @@ Ideas and their shortcommings:
 Write a custom html element called: event-bus-webcomponent, which can be queried using document.getElementByName, document.querySelector, etc.
 It then provides some methods, which can be called from outside, which basically is the same as having a global variable now.
 This would also allow the user to provide multiple distinct event busses by instantiating multiple of these elements on the page with different id-attributes, for example.
+
+## Attributions
+
+- Base system idea: https://www.bennadel.com/blog/3518-trying-to-create-a-message-bus-using-an-rxjs-subject-in-angular-6-1-10.htm
