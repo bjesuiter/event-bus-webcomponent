@@ -8,7 +8,6 @@ import { EventBusErrorCallback } from '../../types/event-bus-error-callback';
 
 @Component({
   tag: 'event-bus',
-  styleUrl: 'event-bus.scss',
   shadow: true,
 })
 export class EventBus {
