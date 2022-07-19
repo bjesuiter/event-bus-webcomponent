@@ -1,6 +1,6 @@
 import { Roarr as logger } from "roarr";
 
-export class EventBus extends HTMLElement {
+export class EventBusWebcomp extends HTMLElement {
   private shadow: ShadowRoot;
 
   constructor() {
