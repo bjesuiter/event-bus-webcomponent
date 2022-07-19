@@ -5,63 +5,75 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { EventBusErrorCallback } from "./types/event-bus-error-callback";
+import { EventBusErrorCallback } from "../src/lib-event-bus/types/event-bus-error-callback";
 import { Observable, Subscription } from "rxjs";
-import { TypeDiscriminator } from "./types/type-discriminator";
-import { EventBusCallback } from "./types/event-bus-callback";
+import { TypeDiscriminator } from "../src/lib-event-bus/types/type-discriminator";
+import { EventBusCallback } from "../src/lib-event-bus/types/event-bus-callback";
 export namespace Components {
-    interface EventBus {
-        /**
-          * I push the given event onto the message bus.  Note: Public methods in stencil elements need to be async by definition!
-          * @param event
-         */
-        "emit": (event: any) => Promise<void>;
-        /**
-          * @returns the complete eventStream as observable inside a promise
-         */
-        "getEventStream": () => Promise<Observable<any>>;
-        /**
-          * @param typeFilter
-          * @returns an observable which contains only events of type 'typeFilter'
-         */
-        "getEventStreamFor": <T>(typeFilter: TypeDiscriminator<T>) => Promise<Observable<T>>;
-        /**
-          * I subscribe to the message bus, but only invoke the callback when the event is of the given newable type (ie, it's a Class definition, not an instance). -- NOTE: The NewableType<T> will allow for Type inference.
-          * @param typeFilter
-          * @param callback
-          * @param callbackContext
-          * @returns
-         */
-        "on": <T>(typeFilter: TypeDiscriminator<T>, callback: EventBusCallback<T>, callbackContext?: any, errorCallback?: EventBusErrorCallback) => Promise<Subscription>;
-        /**
-          * Replaces the default error callback function with a custom one
-         */
-        "setDefaultErrorCallback": (callback: EventBusErrorCallback) => Promise<void>;
-    }
+  interface EventBus {
+    /**
+     * I push the given event onto the message bus.  Note: Public methods in stencil elements need to be async by definition!
+     * @param event
+     */
+    "emit": (event: any) => Promise<void>;
+    /**
+     * @returns the complete eventStream as observable inside a promise
+     */
+    "getEventStream": () => Promise<Observable<any>>;
+    /**
+     * @param typeFilter
+     * @returns an observable which contains only events of type 'typeFilter'
+     */
+    "getEventStreamFor": <T>(
+      typeFilter: TypeDiscriminator<T>,
+    ) => Promise<Observable<T>>;
+    /**
+     * I subscribe to the message bus, but only invoke the callback when the event is of the given newable type (ie, it's a Class definition, not an instance). -- NOTE: The NewableType<T> will allow for Type inference.
+     * @param typeFilter
+     * @param callback
+     * @param callbackContext
+     * @returns
+     */
+    "on": <T>(
+      typeFilter: TypeDiscriminator<T>,
+      callback: EventBusCallback<T>,
+      callbackContext?: any,
+      errorCallback?: EventBusErrorCallback,
+    ) => Promise<Subscription>;
+    /**
+     * Replaces the default error callback function with a custom one
+     */
+    "setDefaultErrorCallback": (
+      callback: EventBusErrorCallback,
+    ) => Promise<void>;
+  }
 }
 declare global {
-    interface HTMLEventBusElement extends Components.EventBus, HTMLStencilElement {
-    }
-    var HTMLEventBusElement: {
-        prototype: HTMLEventBusElement;
-        new (): HTMLEventBusElement;
-    };
-    interface HTMLElementTagNameMap {
-        "event-bus": HTMLEventBusElement;
-    }
+  interface HTMLEventBusElement
+    extends Components.EventBus, HTMLStencilElement {
+  }
+  var HTMLEventBusElement: {
+    prototype: HTMLEventBusElement;
+    new (): HTMLEventBusElement;
+  };
+  interface HTMLElementTagNameMap {
+    "event-bus": HTMLEventBusElement;
+  }
 }
 declare namespace LocalJSX {
-    interface EventBus {
-    }
-    interface IntrinsicElements {
-        "event-bus": EventBus;
-    }
+  interface EventBus {
+  }
+  interface IntrinsicElements {
+    "event-bus": EventBus;
+  }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
-    export namespace JSX {
-        interface IntrinsicElements {
-            "event-bus": LocalJSX.EventBus & JSXBase.HTMLAttributes<HTMLEventBusElement>;
-        }
+  export namespace JSX {
+    interface IntrinsicElements {
+      "event-bus":
+        & LocalJSX.EventBus
+        & JSXBase.HTMLAttributes<HTMLEventBusElement>;
     }
+  }
 }

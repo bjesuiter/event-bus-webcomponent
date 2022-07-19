@@ -1,1 +1,1 @@
-export * from './types';
+export * from "../src/lib-event-bus/types";
