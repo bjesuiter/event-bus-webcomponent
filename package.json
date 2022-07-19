@@ -2,6 +2,7 @@
   "name": "event-bus-webcomponent",
   "version": "1.0.0-2",
   "description": "A webcomponent which provides an event bus as dom element for easy access with document.querySelector()",
+  "type": "module",
   "files": [
   ],
   "scripts": {
