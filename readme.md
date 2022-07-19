@@ -1,7 +1,5 @@
 # Event Bus Webcomponent
 
-> Original Stencil Readme: [./stencil-readme.md](./stencil-readme.md)
-
 This webcomponent is intended as dom-based event bus with TypeScript save events.
 
 ## Reason

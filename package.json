@@ -1,29 +1,14 @@
 {
   "name": "event-bus-webcomponent",
   "version": "1.0.0-2",
-  "description": "Stencil Component Starter",
-  "main": "dist/index.cjs.js",
-  "module": "dist/custom-elements/index.js",
-  "es2015": "dist/esm/index.mjs",
-  "es2017": "dist/esm/index.mjs",
-  "types": "dist/custom-elements/index.d.ts",
-  "collection": "dist/collection/collection-manifest.json",
-  "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/event-bus-webcomponent/event-bus-webcomponent.esm.js",
+  "description": "A webcomponent which provides an event bus as dom element for easy access with document.querySelector()",
   "files": [
-    "dist/",
-    "loader/"
   ],
   "scripts": {
-    "build": "stencil build --docs",
-    "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "start": "",
   },
   "dependencies": {
-    "@stencil/core": "^2.6.0",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.5.5"
   },
   "license": "MIT"
 }
