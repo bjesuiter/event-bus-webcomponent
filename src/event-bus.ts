@@ -1,3 +1,5 @@
+import { logger } from "./logger";
+
 export class EventBus extends HTMLElement {
   private shadow: ShadowRoot;
 
@@ -12,20 +14,22 @@ export class EventBus extends HTMLElement {
   }
 
   connectedCallback() {
+    logger.info("Connected to the dom: ", this);
   }
 
   disconnectedCallback() {
+    logger.info("Disconnected from the dom: ", this);
   }
 
   attributeChangedCallback(
-    _name: string,
-    _oldValue: string,
-    _newValue: string,
+    name: string,
+    oldVal: string,
+    newVal: string,
   ) {
-    console.log("Custom square element attributes changed.");
+    logger.debug("Attribute changed: ", { name, oldVal, newVal });
   }
 
   adoptedCallback() {
-    console.log("Event-Bus.");
+    logger.debug("Adopted onto a new page.");
   }
 }
