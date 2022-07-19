@@ -22,6 +22,13 @@ export class EventBusGroup {
   }
 
   /**
+   * Replaces the default error callback function with a custom one
+   */
+  public setDefaultErrorCallback(callback: EventBusErrorCallback): void {
+    this.errorCallback = callback;
+  }
+
+  /**
    * I subscribe to the message bus, but only invoke the callback when the event is
    * of the given newable type (ie, it's a Class definition, not an instance).
    * --
