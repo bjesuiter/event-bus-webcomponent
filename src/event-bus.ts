@@ -1,4 +1,4 @@
-import { logger } from "./logger";
+import { Roarr as logger } from "roarr";
 
 export class EventBus extends HTMLElement {
   private shadow: ShadowRoot;
@@ -14,11 +14,11 @@ export class EventBus extends HTMLElement {
   }
 
   connectedCallback() {
-    logger.info("Connected to the dom: ", this);
+    logger.info({ id: this.id }, "Event-Bus connected to the dom");
   }
 
   disconnectedCallback() {
-    logger.info("Disconnected from the dom: ", this);
+    logger.info({ id: this.id }, "Event-Bus disconnected from the dom");
   }
 
   attributeChangedCallback(
@@ -26,10 +26,16 @@ export class EventBus extends HTMLElement {
     oldVal: string,
     newVal: string,
   ) {
-    logger.debug("Attribute changed: ", { name, oldVal, newVal });
+    logger.trace(
+      { id: this.id },
+      "Event-Bus attribute '%s' changed from '%s' to %s",
+      name,
+      oldVal,
+      newVal,
+    );
   }
 
   adoptedCallback() {
-    logger.debug("Adopted onto a new page.");
+    logger.trace({ id: this.id }, "Event-Bus Adopted onto a new page");
   }
 }
