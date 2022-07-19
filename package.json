@@ -6,10 +6,26 @@
   "files": [
   ],
   "scripts": {
-    "start": "",
+    "del_dist": "del dist/*",
+    "tsc": "tsc",
+    "bundle": "esbuild dist/index.js --bundle --outfile=dist/bundle.js --format=esm --platform=neutral ",
+    "build": "run-s del_dist tsc bundle",
+    "start": "npm run watch-build",
+    "watch-build": "concurrently \"npm:watch-tsc\" \"npm:watch-bundle\" \"npm:serve\"",
+    "watch-bundle": "npm run bundle -- --watch",
+    "watch-tsc": "del dist/* && tsc --watch",
+    "serve": "web-dev-server"
   },
   "dependencies": {
     "rxjs": "^7.5.5"
+  },  "devDependencies": {
+    "@web/dev-server": "^0.1.31",
+    "concurrently": "^7.2.0",
+    "del-cli": "^4.0.1",
+    "esbuild": "^0.14.39",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.6.2",
+    "typescript": "^4.6.4"
   },
   "license": "MIT"
 }
