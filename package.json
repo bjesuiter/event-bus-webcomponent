@@ -3,8 +3,7 @@
   "version": "1.0.0-2",
   "description": "A webcomponent which provides an event bus as dom element for easy access with document.querySelector()",
   "type": "module",
-  "files": [
-  ],
+  "files": [],
   "scripts": {
     "del_dist": "del dist/*",
     "tsc": "tsc",
@@ -17,8 +16,10 @@
     "serve": "web-dev-server"
   },
   "dependencies": {
+    "logdown": "^3.3.1",
     "rxjs": "^7.5.5"
-  },  "devDependencies": {
+  },
+  "devDependencies": {
     "@web/dev-server": "^0.1.31",
     "concurrently": "^7.2.0",
     "del-cli": "^4.0.1",
