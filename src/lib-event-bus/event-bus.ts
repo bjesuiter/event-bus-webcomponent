@@ -33,4 +33,12 @@ export class EventBus {
   public emit(event: unknown): void {
     this.eventStream.next(event);
   }
+
+  /**
+   * PLEASE BE SURE WHAT YOU DO WHEN YOU USE THIS!
+   * Return the whole eventStream as observable
+   */
+  public get eventStream$() {
+    return this.eventStream.asObservable();
+  }
 }
