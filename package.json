@@ -7,7 +7,7 @@
   "scripts": {
     "del_dist": "del dist/*",
     "tsc": "tsc",
-    "bundle": "esbuild dist/index.js --bundle --outfile=dist/bundle.js --format=esm --platform=neutral ",
+    "bundle": "esbuild dist/index.js --bundle --outfile=dist/bundle.js --format=esm --platform=browser",
     "build": "run-s del_dist tsc bundle",
     "start": "npm run watch-build",
     "watch-build": "concurrently \"npm:watch-tsc\" \"npm:watch-bundle\" \"npm:serve\"",
